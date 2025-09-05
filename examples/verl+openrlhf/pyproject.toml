@@ -1,0 +1,52 @@
+[project]
+name = "verl-openrlhf-demo"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "torch==2.7.1",
+    "transformers==4.56.0",
+    "flash-attn==2.8.3",
+    "vllm[flashinfer]==0.10.1.1",
+    "deepspeed==0.17.5",
+    "liger_kernel==0.6.2",
+]
+
+[project.optional-dependencies]
+verl = ["verl"]
+openrlhf = ["openrlhf", "deepspeed==0.17.5"]
+
+[tool.uv]
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+conflicts = [[{ extra = "verl" }, { extra = "openrlhf" }]]
+
+[tool.uv.extra-build-dependencies]
+flash-attn = [{ requirement = "torch", match-runtime = true }]
+deepspeed = [{ requirement = "torch", match-runtime = true }]
+
+[tool.uv.extra-build-variables]
+flash-attn = { FLASH_ATTENTION_SKIP_CUDA_BUILD = "TRUE" }
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchaudio = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+# https://github.com/volcengine/verl/tree/0b533f7bcf3959faa9ad193c51f3bdf285547984
+verl = { path = "verl", editable = true }
+# https://github.com/OpenRLHF/OpenRLHF/tree/564e4672dee0f1599c2dfe434f135a8c9570318f
+openrlhf = { path = "OpenRLHF", editable = true }
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+# url = "https://mirrors.nju.edu.cn/pytorch/whl/cu128"
+explicit = true

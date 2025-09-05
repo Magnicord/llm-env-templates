@@ -1,0 +1,30 @@
+[project]
+name = "dev"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[dependency-groups]
+dev = [{ include-group = "lint" }, { include-group = "format" }]
+lint = ["ruff"]
+format = ["black", "isort"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
+py_version = 311
+extra_standard_library = ["typing_extensions"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "double"

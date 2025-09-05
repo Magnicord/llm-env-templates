@@ -1,0 +1,45 @@
+[project]
+name = "verl-cu124-demo"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "torch==2.6.0",
+    "transformers==4.56.0",
+    "flash-attn==2.7.4.post1",
+    "vllm==0.8.5.post1",
+    "flashinfer-python==0.2.5",
+    "liger-kernel==0.6.2",
+    "verl",
+]
+
+[tool.uv]
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[tool.uv.extra-build-dependencies]
+flash-attn = [{ requirement = "torch", match-runtime = true }]
+
+[tool.uv.extra-build-variables]
+flash-attn = { FLASH_ATTENTION_SKIP_CUDA_BUILD = "TRUE" }
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchaudio = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+# https://github.com/volcengine/verl/tree/0b533f7bcf3959faa9ad193c51f3bdf285547984
+verl = { path = "verl", editable = true }
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+# url = "https://mirrors.nju.edu.cn/pytorch/whl/cu128"
+explicit = true
