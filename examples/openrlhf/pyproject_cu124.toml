@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
     "torch==2.6.0",
-    "transformers==4.56.0",
+    "transformers~=4.56.1",
     "flash-attn==2.7.4.post1",
     "vllm==0.8.5.post1",
     "flashinfer-python==0.2.5",
@@ -53,13 +53,13 @@ requires-dist = [
     "torchdata",
     "torchmetrics",
     "tqdm",
-    "transformers==4.56",
+    "transformers==4.56.1",
     "transformers_stream_generator",
     "wandb",
     "wheel",
     # extra_require
-    "vllm==0.10.1.1; extra == 'vllm'",
-    "vllm>0.10.1.1; extra == 'vllm_latest'",
+    "vllm==0.10.2; extra == 'vllm'",
+    "vllm>0.10.2; extra == 'vllm_latest'",
     "ring_flash_attn; extra == 'ring_flash_attn'",
     "liger_kernel; extra == 'liger_kernel'",
 ]
@@ -75,7 +75,7 @@ torchvision = [
 torchaudio = [
     { index = "pytorch-cu124", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-# https://github.com/OpenRLHF/OpenRLHF/tree/564e4672dee0f1599c2dfe434f135a8c9570318f
+# https://github.com/OpenRLHF/OpenRLHF/tree/35d12c7846dc37fd2f05f3c79ea4a5f0677ed1c4
 openrlhf = { path = "OpenRLHF", editable = true }
 
 [[tool.uv.index]]

@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
     "torch==2.6.0",
-    "transformers==4.56.0",
+    "transformers~=4.56.1",
     "flash-attn==2.7.4.post1",
     "vllm==0.8.5.post1",
     "flashinfer-python==0.2.5",
@@ -31,7 +31,7 @@ torchvision = [
 torchaudio = [
     { index = "pytorch-cu124", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-# https://github.com/volcengine/verl/tree/0b533f7bcf3959faa9ad193c51f3bdf285547984
+# https://github.com/volcengine/verl/tree/c7922f0297830538ad8467ed590b46268c68da14
 verl = { path = "verl", editable = true }
 
 [[tool.uv.index]]
